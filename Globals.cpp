@@ -72,7 +72,7 @@ void Globals::runGame()
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			//move down
-			view.move(360.0f, 0.0f);
+			view.move(1.0f, 0.0f);
 		}
 		
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
