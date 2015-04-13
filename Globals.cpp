@@ -23,10 +23,12 @@ void Globals::runGame()
 	//window and view setup
 	sf::RenderWindow window(sf::VideoMode(1280, 640), "Kill It With Fire!");
 	window.setFramerateLimit(60);
-	window.setMouseCursorVisible(false);
 	sf::View view(sf::FloatRect(0, 0, 1280, 640));
 	window.setView(view);
 	view.setCenter(640, 320);
+
+	//insert main menu screen here
+
 
 	//tiles setup - map loading
 	if(!textures[0].texture.loadFromFile(textures[0].fileName))
@@ -45,6 +47,8 @@ void Globals::runGame()
 			}
 		}
 	}
+
+	window.setMouseCursorVisible(false);
 
 	//game loop
     while (window.isOpen())
