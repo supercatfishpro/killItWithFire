@@ -1,3 +1,5 @@
+//Evan Gordon
+
 #include "globals.h"
 #include <iostream>
 
@@ -24,7 +26,7 @@ void Globals::runGame()
 	window.setMouseCursorVisible(false);
 	sf::View view(sf::FloatRect(0, 0, 1280, 640));
 	window.setView(view);
-	view.setCenter(0, 0);
+	view.setCenter(640, 320);
 
 	//tiles setup - map loading
 	if(!textures[0].texture.loadFromFile(textures[0].fileName))
@@ -67,12 +69,13 @@ void Globals::runGame()
 			if(!(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)))
 			{
 				//move up
+				view.move(0.0, -5.0);
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			//move down
-			view.move(1.0f, 0.0f);
+			view.move(0.0, 5.0);
 		}
 		
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -80,14 +83,16 @@ void Globals::runGame()
 			if(!(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)))
 			{
 				//move left
+				view.move(-5.0, 0.0);
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
 			//right
-			view.move(0.0, 1.0);
+			view.move(5.0, 0.0);
 		}
         window.clear();
+		window.setView(view);
         drawGameMap(window);
         window.display();
     }
