@@ -23,7 +23,7 @@ public:
     void setState(bool);
     void setText(std::string);
 
-    bool getVar();
+    bool getState();
     sf::Sprite* getSprite();
     sf::Text* getText();
 };

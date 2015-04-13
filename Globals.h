@@ -7,6 +7,7 @@
 #include <string>
 
 #include "Map.h"
+#include "Button.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -29,9 +30,10 @@ struct TextureArray
 class Globals
 {
 private:	
-	TextureArray textures[1];
+	TextureArray textures[3];
 	Map gameMap;
 	Point cameraPosition;
+	sf::Font gameFont;
 
 	//ai for enemies
 	//assume this is a survival game,
@@ -46,6 +48,7 @@ public:
 	Globals();
 	Globals(int mapx, int mapy, int cameraX, int cameraY);
 
+	void mainMenu(sf::RenderWindow& window);
 	void runGame();
 	void drawGameMap(sf::RenderWindow& window);//write this function
 		

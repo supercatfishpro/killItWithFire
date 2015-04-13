@@ -23,6 +23,7 @@ Button::Button(sf::Texture* normal, sf::Texture* clicked, std::string text, sf::
     this->text.setString(text);
     this->text.setPosition(location.x + 3, location.y + 3);
     this->text.setCharacterSize(14);
+	this->text.setColor(sf::Color::Blue);
 }
 
 void Button::checkIfClick (sf::Vector2f mousePos)
@@ -52,7 +53,7 @@ void Button::setText(std::string text)
 {
    this->text.setString(text);
 }
-bool Button::getVar() 
+bool Button::getState() 
 {
     return isPushed;
 }

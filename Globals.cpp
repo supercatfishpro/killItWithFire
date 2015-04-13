@@ -6,6 +6,8 @@
 Globals::Globals()
 {
 	textures[0].fileName = "overWorld.png";
+	textures[1].fileName = "menuButton.png";
+	textures[2].fileName = "menuButtonPressed.png";
 	cameraPosition.x = 0;
 	cameraPosition.y = 0;	
 }
@@ -13,7 +15,10 @@ Globals::Globals()
 Globals::Globals(int mapx,int mapy, int cameraX, int cameraY)
 {
 	textures[0].fileName = "overWorld.png";
+	textures[1].fileName = "menuButton.png";
+	textures[2].fileName = "menuButtonPressed.png";
 	gameMap.setDefaultTiles(textures[0].texture);
+
 	cameraPosition.x = cameraX;
 	cameraPosition.y = cameraY;
 }
@@ -26,15 +31,26 @@ void Globals::runGame()
 	sf::View view(sf::FloatRect(0, 0, 1280, 640));
 	window.setView(view);
 	view.setCenter(640, 320);
+	
+	//font setup
+	if(!gameFont.loadFromFile("kongtext.ttf"))
+		{
+		throw(42);
+		}
 
-	//insert main menu screen here
-
-
-	//tiles setup - map loading
-	if(!textures[0].texture.loadFromFile(textures[0].fileName))
+	//tiles setup 
+	for(int i = 0; i < 3; i++)
+	{
+	if(!textures[i].texture.loadFromFile(textures[i].fileName))
 			{
 			throw(42);
 			}
+	}
+
+	//insert main menu screen here
+	mainMenu(window);
+
+	//map loading
 	gameMap = Map(100, 100);
 	gameMap.setDefaultTiles(textures[0].texture);
 	for(int i = 0; i < 40; i++)
@@ -100,6 +116,26 @@ void Globals::runGame()
         drawGameMap(window);
         window.display();
     }
+}
+
+void Globals::mainMenu(sf::RenderWindow& window)
+{
+	Button mapMaker(&textures[1].texture, &textures[2].texture, std::string("Map Maker"), sf::Vector2f(100.0f, 530.0f), gameFont); 
+
+	while(!mapMaker.getState())
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+			// left mouse button is pressed check if mutton is clicked
+			sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+			mapMaker.checkIfClick(sf::Vector2f(localPosition.x, localPosition.y));
+			}
+
+		window.clear();
+		window.draw(*mapMaker.getSprite());
+		window.draw(*mapMaker.getText());
+		window.display();
+	}
 }
 
 void Globals::drawGameMap(sf::RenderWindow& window)
