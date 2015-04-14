@@ -10,7 +10,7 @@ Button::Button(sf::Texture* normal, sf::Texture* clicked, sf::Vector2f location)
     this->clicked.setPosition(location);
 }
 
-Button::Button(sf::Texture* normal, sf::Texture* clicked, std::string text, sf::Vector2f location, sf::Font font)
+Button::Button(sf::Texture* normal, sf::Texture* clicked, std::string text, sf::Vector2f location, sf::Font* font)
 {
     this->normal.setTexture(*normal);
     this->clicked.setTexture(*clicked);
@@ -21,20 +21,23 @@ Button::Button(sf::Texture* normal, sf::Texture* clicked, std::string text, sf::
 
 	//string for button
     this->text.setString(text);
-    this->text.setPosition(location.x + 3, location.y + 3);
+	this->text.setFont(*font);
+    this->text.setPosition(location.x + 12, location.y + 8);
     this->text.setCharacterSize(14);
 	this->text.setColor(sf::Color::Blue);
 }
 
-void Button::checkIfClick (sf::Vector2f mousePos)
+bool Button::checkIfClick (sf::Vector2f* mousePos)
 {
-    if (mousePos.x > currentSpr->getPosition().x && mousePos.x<(currentSpr->getPosition().x + currentSpr->getLocalBounds().width)) 
+    if ((*mousePos).x > currentSpr->getPosition().x && (*mousePos).x<(currentSpr->getPosition().x + currentSpr->getLocalBounds().width)) 
 	{
-        if(mousePos.y>currentSpr->getPosition().y && mousePos.y<(currentSpr->getPosition().y + currentSpr->getLocalBounds().height)) 
+        if((*mousePos).y>currentSpr->getPosition().y && (*mousePos).y<(currentSpr->getPosition().y + currentSpr->getLocalBounds().height)) 
 		{
             setState(!isPushed);
+			return true;
         }
     }
+	return false;
 }
 void Button::setState(bool currentState) 
 {

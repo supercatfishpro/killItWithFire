@@ -30,10 +30,13 @@ struct TextureArray
 class Globals
 {
 private:	
+	sf::RenderWindow window;
+	sf::View view;
 	TextureArray textures[3];
 	Map gameMap;
 	Point cameraPosition;
 	sf::Font gameFont;
+	int gameMode; //temp fix - 1 is for game 2 is for mapMaker
 
 	//ai for enemies
 	//assume this is a survival game,
@@ -48,9 +51,12 @@ public:
 	Globals();
 	Globals(int mapx, int mapy, int cameraX, int cameraY);
 
-	void mainMenu(sf::RenderWindow& window);
+	//todo make renderWindow a global item
+	void mainMenu();
+	void initializeGame();
+	void drawGameMap();//write this function
 	void runGame();
-	void drawGameMap(sf::RenderWindow& window);//write this function
+	void runMapMaker();
 		
 };
 

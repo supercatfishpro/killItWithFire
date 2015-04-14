@@ -17,9 +17,9 @@ private:
 
 public:
 	Button(sf::Texture* normal, sf::Texture* clicked, sf::Vector2f location);
-    Button (sf::Texture* normal, sf::Texture* clicked, std::string text, sf::Vector2f location, sf::Font font);
+    Button (sf::Texture* normal, sf::Texture* clicked, std::string text, sf::Vector2f location, sf::Font* font);
 
-    void checkIfClick (sf::Vector2f);
+    bool checkIfClick (sf::Vector2f* mousePos);
     void setState(bool);
     void setText(std::string);
 
