@@ -2,7 +2,9 @@
 
 #include "globals.h"
 #include <iostream>
-#include <memory>
+
+//remove later and replace w menu object
+#include "UI.h"
 
 Globals::Globals()
 {
@@ -29,10 +31,10 @@ Globals::Globals(int mapx,int mapy, int cameraX, int cameraY)
 void Globals::initializeGame()
 {
 	//window and view setup
-	this->window.create(sf::VideoMode(1280, 640), "Kill It With Fire!");
-	this->window.setFramerateLimit(60);
+	window.create(sf::VideoMode(1280, 640), "Kill It With Fire!");
+	window.setFramerateLimit(60);
 	view = sf::View(sf::FloatRect(0, 0, 1280, 640));
-	this->window.setView(view);
+	window.setView(view);
 	view.setCenter(640, 320);
 	
 	//font setup
@@ -79,8 +81,18 @@ void Globals::initializeGame()
 	}	
 }
 
+
 void Globals::runMapMaker()
 {
+	sf::Texture menuTexture;
+	if(!menuTexture.loadFromFile("mapMakerMenu.png"))
+			{
+			throw(42);
+			}
+	UI itemMenu(true, menuTexture);
+	itemMenu.setPosition(1132.0, 0);
+	itemMenu.toggle();
+
 //game loop
     while (window.isOpen())
     {
@@ -126,9 +138,17 @@ void Globals::runMapMaker()
 			//right
 			view.move(5.0, 0.0);
 		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
+		{
+		itemMenu.toggle();
+		}
         window.clear();
 		window.setView(view);
         drawGameMap();
+		if(itemMenu.getCanDraw())
+		{
+			window.draw(itemMenu.draw());
+		}
         window.display();
     }
 }
