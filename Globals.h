@@ -34,7 +34,7 @@ private:
 	sf::RenderWindow window;
 	sf::Event event;
 	sf::View view, userInterface;
-	TextureArray textures[4];
+	TextureArray textures[5];
 	Map gameMap;
 	Point cameraPosition;
 	sf::Font gameFont;

@@ -12,6 +12,7 @@ Globals::Globals()
 	textures[1].fileName = "menuButton.png";
 	textures[2].fileName = "menuButtonPressed.png";
 	textures[3].fileName = "king.png";
+	textures[4].fileName = "titleScreen.png";
 	cameraPosition.x = 0;
 	cameraPosition.y = 0;
 	gameMode = 0;
@@ -23,6 +24,7 @@ Globals::Globals(int mapx,int mapy, int cameraX, int cameraY)
 	textures[1].fileName = "menuButton.png";
 	textures[2].fileName = "menuButtonPressed.png";
 	textures[3].fileName = "king.png";
+	textures[4].fileName = "titleScreen.png";
 	gameMap.setDefaultTiles(textures[0].texture);
 
 	cameraPosition.x = cameraX;
@@ -48,7 +50,7 @@ void Globals::initializeGame()
 	}
 
 	//tiles setup 
-	for(int i = 0; i < 4; i++)
+	for(int i = 0; i < 5; i++)
 	{
 		if(!textures[i].texture.loadFromFile(textures[i].fileName))
 		{
@@ -117,6 +119,10 @@ void Globals::runMapMaker()
 				{
 				itemMenu.toggle();
 				}
+				else if(event.key.code == sf::Keyboard::E)
+				{
+				player.attack();
+				}
 				break;
 			default:
 				break;
@@ -130,12 +136,14 @@ void Globals::runMapMaker()
 			{
 				//move up
 				view.move(0.0, -5.0);
+				player.setOrientation(3);
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			//move down
 			view.move(0.0, 5.0);
+			player.setOrientation(0);
 		}
 
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -144,12 +152,14 @@ void Globals::runMapMaker()
 			{
 				//move left
 				view.move(-5.0, 0.0);
+				player.setOrientation(1);
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			//right
+			//move right
 			view.move(5.0, 0.0);
+			player.setOrientation(2);
 		}
 
 		window.clear();
@@ -254,6 +264,7 @@ void Globals::mainMenu()
 		}
 
 		window.clear();
+		window.draw(sf::Sprite(textures[4].texture));
 		window.draw(*mapMaker.getSprite());
 		window.draw(*mapMaker.getText());
 		window.draw(*playGame.getSprite());
