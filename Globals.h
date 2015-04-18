@@ -8,6 +8,7 @@
 
 #include "Map.h"
 #include "Button.h"
+#include "Character.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -31,13 +32,15 @@ class Globals
 {
 private:	
 	sf::RenderWindow window;
-	sf::View view;
-	TextureArray textures[3];
+	sf::Event event;
+	sf::View view, userInterface;
+	TextureArray textures[4];
 	Map gameMap;
 	Point cameraPosition;
 	sf::Font gameFont;
 	int gameMode; //temp fix - 1 is for game 2 is for mapMaker
 
+	Character player;
 	//ai for enemies
 	//assume this is a survival game,
 	//if it is then ai's arent particularly targeting you over another ai

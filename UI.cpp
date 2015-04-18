@@ -17,27 +17,27 @@ UI::UI(bool canToggle, sf::Texture& image)
 
 void UI::setPosition(float x, float y)
 {
-image.setPosition(x, y);
+	image.setPosition(x, y);
 }
 
 void UI::toggle()
 {
 	if(canToggle)
 	{
-	if(canDraw)
-	{
-	this->canDraw = false;
-	}
-	else
-	{
-	this->canDraw = true;
-	}
+		if(canDraw)
+		{
+			this->canDraw = false;
+		}
+		else
+		{
+			this->canDraw = true;
+		}
 	}
 }
 
 sf::Sprite UI::draw()
 {
-		return image;
+	return image;
 }
 
 bool UI::getCanDraw()

@@ -20,6 +20,7 @@ public:
 	bool getCanDraw();
 
 	//maybe add move location function?
+
 	void toggle();
 	sf::Sprite draw();
 };
