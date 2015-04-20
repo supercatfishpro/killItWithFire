@@ -7,7 +7,6 @@
 #include <stdexcept>
 
 
-
 class Character
 {
 private:
@@ -18,7 +17,6 @@ private:
 	sf::IntRect drawRect;
 
 public:
-
 
 	Character();
 	Character(sf::Texture& texture);

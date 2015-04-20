@@ -4,11 +4,10 @@
 
 	Character::Character()
 	{
-	animationNumber  = 0;
-	orientation = 0;
-	drawRect = sf::IntRect(0, 1, 32, 64);
+		animationNumber  = 0;
+		orientation = 0;
+		drawRect = sf::IntRect(0, 0, 32, 64);
 	}
-
 	Character::Character(sf::Texture& texture)
 	{
 		animationNumber  = 0;
@@ -20,11 +19,10 @@
 			character.setTextureRect(drawRect);
 			character.setOrigin(16, 48);
 		}
-		catch(int e)
+	catch(int e)
 		{
          std::cout<<"Error "<<e<<": "<<"Character does not exist in Tile.\n";
 		}
-
 	}
 
 	void Character::animate() 

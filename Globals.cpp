@@ -1,18 +1,14 @@
 //Evan Gordon
 
 #include "globals.h"
-#include <iostream>
-
-//remove later and replace w menu object
-#include "UI.h"
 
 Globals::Globals()
 {
-	textures[0].fileName = "overWorld.png";
-	textures[1].fileName = "menuButton.png";
-	textures[2].fileName = "menuButtonPressed.png";
-	textures[3].fileName = "king.png";
-	textures[4].fileName = "titleScreen.png";
+	Globals::textures[0].fileName = "overWorld.png";
+	Globals::textures[1].fileName = "menuButton.png";
+	Globals::textures[2].fileName = "menuButtonPressed.png";
+	Globals::textures[3].fileName = "king.png";
+	Globals::textures[4].fileName = "titleScreen.png";
 	cameraPosition.x = 0;
 	cameraPosition.y = 0;
 	gameMode = 0;
@@ -20,13 +16,11 @@ Globals::Globals()
 
 Globals::Globals(int mapx,int mapy, int cameraX, int cameraY)
 {
-	textures[0].fileName = "overWorld.png";
-	textures[1].fileName = "menuButton.png";
-	textures[2].fileName = "menuButtonPressed.png";
-	textures[3].fileName = "king.png";
-	textures[4].fileName = "titleScreen.png";
-	gameMap.setDefaultTiles(textures[0].texture);
-
+	Globals::textures[0].fileName = "overWorld.png";
+	Globals::textures[1].fileName = "menuButton.png";
+	Globals::textures[2].fileName = "menuButtonPressed.png";
+	Globals::textures[3].fileName = "king.png";
+	Globals::textures[4].fileName = "titleScreen.png";
 	cameraPosition.x = cameraX;
 	cameraPosition.y = cameraY;
 	gameMode = 0;
@@ -35,13 +29,13 @@ Globals::Globals(int mapx,int mapy, int cameraX, int cameraY)
 void Globals::initializeGame()
 {
 	//window and view setup
-	window.create(sf::VideoMode(1280, 640), "Kill It With Fire!");
-	window.setFramerateLimit(60);
-	window.setKeyRepeatEnabled(false);
-	view = sf::View(sf::FloatRect(0, 0, 1280, 640));
-	userInterface = sf::View(sf::FloatRect(0, 0, 1280, 640));
-	window.setView(view);
-	view.setCenter(640, 320);
+	Globals::window.create(sf::VideoMode(1280, 640), "Kill It With Fire!");
+	Globals::window.setFramerateLimit(60);
+	Globals::window.setKeyRepeatEnabled(false);
+	Globals::view = sf::View(sf::FloatRect(0, 0, 1280, 640));
+	Globals::userInterface = sf::View(sf::FloatRect(0, 0, 1280, 640));
+	Globals::window.setView(view);
+	Globals::view.setCenter(640, 320);
 
 	//font setup
 	if(!gameFont.loadFromFile("kongtext.ttf"))
@@ -52,7 +46,7 @@ void Globals::initializeGame()
 	//tiles setup 
 	for(int i = 0; i < 5; i++)
 	{
-		if(!textures[i].texture.loadFromFile(textures[i].fileName))
+		if(!Globals::textures[i].texture.loadFromFile(Globals::textures[i].fileName))
 		{
 			throw(42);
 		}
@@ -61,7 +55,6 @@ void Globals::initializeGame()
 	//create character
 	player = Character(textures[3].texture);
 	player.setSpritePostion(sf::Vector2f(640, 320));
-
 	//insert main menu screen here
 	mainMenu();
 
@@ -79,7 +72,7 @@ void Globals::initializeGame()
 		}
 	}
 
-	window.setMouseCursorVisible(false);
+	Globals::window.setMouseCursorVisible(false);
 
 	if(gameMode == 1)
 	{
@@ -105,22 +98,23 @@ void Globals::runMapMaker()
 	itemMenu.toggle();
 
 	//game loop
-	while (window.isOpen())
+	while (Globals::window.isOpen())
 	{
-		while (window.pollEvent(event))
+		while (Globals::window.pollEvent(Globals::event))
 		{
-			switch(event.type)
+			switch(Globals::event.type)
 			{
 			case sf::Event::Closed:
-				window.close();
+				Globals::window.close();
 				break;
 			case sf::Event::KeyPressed:
-				if(event.key.code == sf::Keyboard::Tab)
+				if(Globals::event.key.code == sf::Keyboard::Tab)
 				{
 				itemMenu.toggle();
 				}
-				else if(event.key.code == sf::Keyboard::E)
+				else if(Globals::event.key.code == sf::Keyboard::E)
 				{
+				//this is gonna need some work. currently does nothing
 				player.attack();
 				}
 				break;
@@ -135,14 +129,14 @@ void Globals::runMapMaker()
 			if(!(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)))
 			{
 				//move up
-				view.move(0.0, -5.0);
+				Globals::view.move(0.0, -5.0);
 				player.setOrientation(3);
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			//move down
-			view.move(0.0, 5.0);
+			Globals::view.move(0.0, 5.0);
 			player.setOrientation(0);
 		}
 
@@ -151,42 +145,41 @@ void Globals::runMapMaker()
 			if(!(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)))
 			{
 				//move left
-				view.move(-5.0, 0.0);
+				Globals::view.move(-5.0, 0.0);
 				player.setOrientation(1);
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
 			//move right
-			view.move(5.0, 0.0);
+			Globals::view.move(5.0, 0.0);
 			player.setOrientation(2);
 		}
 
-		window.clear();
-		window.setView(view);
+		Globals::window.clear();
+		Globals::window.setView(Globals::view);
 		drawGameMap();
-		window.setView(userInterface);
-		window.draw(player.getSprite());
+		Globals::window.setView(Globals::userInterface);
+		Globals::window.draw(player.getSprite());
 		if(itemMenu.getCanDraw())
 		{
-			window.draw(itemMenu.draw());
+			Globals::window.draw(itemMenu.draw());
 		}
-		window.display();
+		Globals::window.display();
 	}
 }
 
 void Globals::runGame()
 {
 	//game loop
-	while (window.isOpen())
+	while (Globals::window.isOpen())
 	{
-		sf::Event event;
-		while (window.pollEvent(event))
+		while (Globals::window.pollEvent(Globals::event))
 		{
-			switch(event.type)
+			switch(Globals::event.type)
 			{
 			case sf::Event::Closed:
-				window.close();
+				Globals::window.close();
 				break;
 			default:
 				break;
@@ -200,13 +193,13 @@ void Globals::runGame()
 			if(!(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)))
 			{
 				//move up
-				view.move(0.0, -5.0);
+				Globals::view.move(0.0, -5.0);
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			//move down
-			view.move(0.0, 5.0);
+			Globals::view.move(0.0, 5.0);
 		}
 
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -214,18 +207,18 @@ void Globals::runGame()
 			if(!(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)))
 			{
 				//move left
-				view.move(-5.0, 0.0);
+				Globals::view.move(-5.0, 0.0);
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
 			//right
-			view.move(5.0, 0.0);
+			Globals::view.move(5.0, 0.0);
 		}
-		window.clear();
-		window.setView(view);
+		Globals::window.clear();
+		Globals::window.setView(Globals::view);
 		drawGameMap();
-		window.display();
+		Globals::window.display();
 	}
 }
 
@@ -245,7 +238,7 @@ void Globals::mainMenu()
 		{
 			// left mouse button is pressed check if mutton is clicked
 			bool clicked = false;
-			sf::Vector2i localPosition = sf::Mouse::getPosition(window);
+			sf::Vector2i localPosition = sf::Mouse::getPosition(Globals::window);
 			clicked = mapMaker.checkIfClick(&sf::Vector2f(localPosition.x, localPosition.y));
 			if(clicked)
 			{
@@ -263,13 +256,13 @@ void Globals::mainMenu()
 			}
 		}
 
-		window.clear();
-		window.draw(sf::Sprite(textures[4].texture));
-		window.draw(*mapMaker.getSprite());
-		window.draw(*mapMaker.getText());
-		window.draw(*playGame.getSprite());
-		window.draw(*playGame.getText());
-		window.display();
+		Globals::window.clear();
+		Globals::window.draw(sf::Sprite(textures[4].texture));
+		Globals::window.draw(*mapMaker.getSprite());
+		Globals::window.draw(*mapMaker.getText());
+		Globals::window.draw(*playGame.getSprite());
+		Globals::window.draw(*playGame.getText());
+		Globals::window.display();
 	}
 }
 
@@ -284,9 +277,27 @@ void Globals::drawGameMap()
 		{
 			if(gameMap.validTilePosition(i, j))
 			{
-				window.draw(gameMap.getSprite(i, j));
+				Globals::window.draw(gameMap.getSprite(i, j));
 			}
 		}
 	}
 }
 
+sf::Texture Globals::getTexture(int textureNumb)
+{
+	if(textureNumb < sizeof(textures))
+		{
+		return textures[textureNumb].texture;
+		}
+	else
+		{
+		std::cout<<"error getting texture number: "<< textureNumb << " using texture 1 instead.";
+		return textures[0].texture;
+		}
+}
+
+//static globals variables
+sf::RenderWindow Globals::window;
+sf::Event Globals::event;
+sf::View Globals::view;
+sf::View Globals::userInterface;

@@ -5,16 +5,20 @@
 
 #include <vector>
 #include <string>
+#include <stdexcept>
+#include <iostream>
+
 
 #include "Map.h"
 #include "Button.h"
 #include "Character.h"
 
+//remove late and replace with menu object
+#include "UI.h"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
-
-#include <stdexcept>
 
 struct Point
 {
@@ -31,14 +35,16 @@ struct TextureArray
 class Globals
 {
 private:	
-	sf::RenderWindow window;
-	sf::Event event;
-	sf::View view, userInterface;
+	static sf::RenderWindow window;
+	static sf::Event event;
+	static sf::View view;
+	static sf::View userInterface;
 	TextureArray textures[5];
 	Map gameMap;
 	Point cameraPosition;
 	sf::Font gameFont;
-	int gameMode; //temp fix - 1 is for game 2 is for mapMaker
+	 //temp fix - 1 is for game 2 is for mapMaker
+	int gameMode;
 
 	Character player;
 	//ai for enemies
@@ -50,17 +56,20 @@ private:
 	//this state is also possibly saved if the player is killed
 	//what this would cause is a more dynamic world that seemed more alive
 	//this could also initialize the neural network programming technique i want to implement
+
 public:
 	Globals();
 	Globals(int mapx, int mapy, int cameraX, int cameraY);
 
-	//todo make renderWindow a global item
 	void mainMenu();
 	void initializeGame();
 	void drawGameMap();//write this function
 	void runGame();
 	void runMapMaker();
+
+	sf::Texture getTexture(int textureNumb);
 		
 };
 
 #endif 
+

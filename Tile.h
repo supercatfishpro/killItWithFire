@@ -36,6 +36,7 @@ public:
 
 	sf::Sprite& getSprite();
 
+	
 };
 
 #endif

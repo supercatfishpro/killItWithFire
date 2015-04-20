@@ -1,7 +1,6 @@
 //Evan Gordon
 
 #include "Map.h"
-#include <string>
 
 Map::Map()
 {   
