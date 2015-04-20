@@ -9,8 +9,6 @@ Globals::Globals()
 	Globals::textures[2].fileName = "menuButtonPressed.png";
 	Globals::textures[3].fileName = "king.png";
 	Globals::textures[4].fileName = "titleScreen.png";
-	cameraPosition.x = 0;
-	cameraPosition.y = 0;
 	gameMode = 0;
 }
 
@@ -36,6 +34,7 @@ void Globals::initializeGame()
 	Globals::userInterface = sf::View(sf::FloatRect(0, 0, 1280, 640));
 	Globals::window.setView(view);
 	Globals::view.setCenter(640, 320);
+	Globals::cameraPosition = Globals::window.getPosition();
 
 	//font setup
 	if(!gameFont.loadFromFile("kongtext.ttf"))
@@ -130,13 +129,16 @@ void Globals::runMapMaker()
 			{
 				//move up
 				Globals::view.move(0.0, -5.0);
+				Globals::cameraPosition = Globals::window.getPosition();
 				player.setOrientation(3);
+
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			//move down
 			Globals::view.move(0.0, 5.0);
+			Globals::cameraPosition = Globals::window.getPosition();
 			player.setOrientation(0);
 		}
 
@@ -146,6 +148,7 @@ void Globals::runMapMaker()
 			{
 				//move left
 				Globals::view.move(-5.0, 0.0);
+				Globals::cameraPosition = Globals::window.getPosition();
 				player.setOrientation(1);
 			}
 		}
@@ -153,6 +156,7 @@ void Globals::runMapMaker()
 		{
 			//move right
 			Globals::view.move(5.0, 0.0);
+			Globals::cameraPosition = Globals::window.getPosition();
 			player.setOrientation(2);
 		}
 
@@ -194,12 +198,14 @@ void Globals::runGame()
 			{
 				//move up
 				Globals::view.move(0.0, -5.0);
+				Globals::cameraPosition = Globals::window.getPosition();
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			//move down
 			Globals::view.move(0.0, 5.0);
+			Globals::cameraPosition = Globals::window.getPosition();
 		}
 
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -208,12 +214,14 @@ void Globals::runGame()
 			{
 				//move left
 				Globals::view.move(-5.0, 0.0);
+				Globals::cameraPosition = Globals::window.getPosition();
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
 			//right
 			Globals::view.move(5.0, 0.0);
+			Globals::cameraPosition = Globals::window.getPosition();
 		}
 		Globals::window.clear();
 		Globals::window.setView(Globals::view);
@@ -301,3 +309,4 @@ sf::RenderWindow Globals::window;
 sf::Event Globals::event;
 sf::View Globals::view;
 sf::View Globals::userInterface;
+sf::Vector2i Globals::cameraPosition;

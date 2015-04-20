@@ -20,12 +20,6 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
-struct Point
-{
-int x;
-int y;
-};
-
 struct TextureArray
 {
 	std::string fileName;
@@ -35,13 +29,14 @@ struct TextureArray
 class Globals
 {
 private:	
+	static sf::Vector2i cameraPosition;
 	static sf::RenderWindow window;
 	static sf::Event event;
 	static sf::View view;
 	static sf::View userInterface;
+
 	TextureArray textures[5];
 	Map gameMap;
-	Point cameraPosition;
 	sf::Font gameFont;
 	 //temp fix - 1 is for game 2 is for mapMaker
 	int gameMode;
