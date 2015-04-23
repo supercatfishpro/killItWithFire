@@ -1,6 +1,8 @@
 //Evan Gordon
 -All Rights to KillItWithFire are reserved-
--Use only with permission-
+-Commercial use only with permission-
+-If you want to use this game under no circumstance are you allowed to claim that it is your own work-
+-you may make any changes to the code you want but if you post or link this game anywhere you must give credit-
 
 KillItWithFire is a top down classic RPG that aims to test and possibly engineer new AI algorithms. These algorithms will include a text based chat system with NPC 
 villagers, and also a specialized level up system in which enemies have multiple skills they may use, when these skills allow an enemy to survive an attack or 
