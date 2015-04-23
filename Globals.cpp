@@ -310,3 +310,4 @@ sf::Event Globals::event;
 sf::View Globals::view;
 sf::View Globals::userInterface;
 sf::Vector2i Globals::cameraPosition;
+sf::Font Globals::gameFont;

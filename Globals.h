@@ -34,10 +34,10 @@ private:
 	static sf::Event event;
 	static sf::View view;
 	static sf::View userInterface;
+	static sf::Font gameFont;
 
 	TextureArray textures[5];
 	Map gameMap;
-	sf::Font gameFont;
 	 //temp fix - 1 is for game 2 is for mapMaker
 	int gameMode;
 
