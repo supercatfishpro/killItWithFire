@@ -21,19 +21,23 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="cooldownBar.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UIBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="cooldownBar.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="UIBar.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CC26A417-B024-4099-9CFD-DE17A5258F63}</ProjectGuid>
