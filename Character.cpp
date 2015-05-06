@@ -31,12 +31,10 @@
 	//if movement is still being pushed  then current animation++ %animationNumber
 
 	}
-	int Character::attack()
+	
+	int Character::attack(sf::Clock& gameClock)
 	{
-		//later change animation
-
-		//add effect
-	return 1;
+	return -1;
 	}
 
 	void Character::setOrientation(int orientation)
@@ -87,7 +85,7 @@
 		return location;
 	}
 
-	sf::Sprite Character::getSprite()
+	sf::Sprite& Character::getSprite()
 	{
 		return this->character;
 	}

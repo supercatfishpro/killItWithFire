@@ -39,7 +39,10 @@
     <ClCompile Include="UIBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cooldownBar.cpp">
+    <ClCompile Include="CooldownBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCharacter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,7 +68,10 @@
     <ClInclude Include="UIBar.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="cooldownBar.h">
+    <ClInclude Include="PlayerCharacter.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CooldownBar.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

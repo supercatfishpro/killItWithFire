@@ -28,7 +28,6 @@ void Globals::initializeGame()
 {
 	//window and view setup
 	Globals::window.create(sf::VideoMode(1280, 640), "Kill It With Fire!");
-	Globals::window.setFramerateLimit(60);
 	Globals::window.setKeyRepeatEnabled(false);
 	Globals::view = sf::View(sf::FloatRect(0, 0, 1280, 640));
 	Globals::userInterface = sf::View(sf::FloatRect(0, 0, 1280, 640));
@@ -52,7 +51,7 @@ void Globals::initializeGame()
 	}
 
 	//create character
-	player = Character(textures[3].texture);
+	player = PlayerCharacter(textures[3].texture);
 	player.setSpritePostion(sf::Vector2f(640, 320));
 	//insert main menu screen here
 	mainMenu();
@@ -99,6 +98,8 @@ void Globals::runMapMaker()
 	//game loop
 	while (Globals::window.isOpen())
 	{
+		gameTime = gameClock.restart();
+
 		while (Globals::window.pollEvent(Globals::event))
 		{
 			switch(Globals::event.type)
@@ -114,7 +115,7 @@ void Globals::runMapMaker()
 				else if(Globals::event.key.code == sf::Keyboard::E)
 				{
 				//this is gonna need some work. currently does nothing
-				player.attack();
+				player.attack(gameTime);
 				}
 				break;
 			default:
@@ -164,7 +165,7 @@ void Globals::runMapMaker()
 		Globals::window.setView(Globals::view);
 		drawGameMap();
 		Globals::window.setView(Globals::userInterface);
-		Globals::window.draw(player.getSprite());
+		Globals::player.draw(window, gameClock);
 		if(itemMenu.getCanDraw())
 		{
 			Globals::window.draw(itemMenu.draw());
@@ -227,6 +228,7 @@ void Globals::runGame()
 		Globals::window.setView(Globals::view);
 		drawGameMap();
 		Globals::window.display();
+		Globals::gameClock.restart();
 	}
 }
 
@@ -311,3 +313,5 @@ sf::View Globals::view;
 sf::View Globals::userInterface;
 sf::Vector2i Globals::cameraPosition;
 sf::Font Globals::gameFont;
+sf::Clock Globals::gameClock;
+sf::Time Globals::gameTime;

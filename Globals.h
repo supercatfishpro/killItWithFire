@@ -11,9 +11,9 @@
 
 #include "Map.h"
 #include "Button.h"
-#include "Character.h"
+#include "PlayerCharacter.h"
 
-//remove late and replace with menu object
+//remove later and replace with menu object
 #include "UI.h"
 
 #include <SFML/Graphics.hpp>
@@ -35,13 +35,15 @@ private:
 	static sf::View view;
 	static sf::View userInterface;
 	static sf::Font gameFont;
+	static sf::Clock gameClock;
+	static sf::Time gameTime;
 
 	TextureArray textures[5];
 	Map gameMap;
 	 //temp fix - 1 is for game 2 is for mapMaker
 	int gameMode;
 
-	Character player;
+	PlayerCharacter player;
 	//ai for enemies
 	//assume this is a survival game,
 	//if it is then ai's arent particularly targeting you over another ai

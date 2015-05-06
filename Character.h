@@ -6,7 +6,7 @@
 
 #include <stdexcept>
 
-
+//make this a parent class, and have a player character class that also includes the cooldown bar?
 class Character
 {
 private:
@@ -22,7 +22,7 @@ public:
 	Character(sf::Texture& texture);
 
 	void animate(); 
-	int attack();//returns an int to declare to globals what type of particle is desired?
+	virtual int attack(sf::Clock& gameClock);//returns an int to declare to globals what type of particle is desired?
 
 	void setOrientation(int orientation);
 	void setLocation(int x, int y);
@@ -31,7 +31,7 @@ public:
 
 	int getOrientation();
 	sf::Vector2f getLocation();
-	sf::Sprite getSprite();
+	sf::Sprite& getSprite();
 
 
 };
